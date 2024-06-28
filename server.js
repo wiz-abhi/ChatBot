@@ -2,9 +2,11 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const port = 3000;
+const path = require('path');
 
 // Set EJS as the templating engine
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 // Middleware to parse JSON and URL-encoded bodies
 app.use(express.json());
