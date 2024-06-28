@@ -4,42 +4,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot</title>
+    <title>Input Form</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            text-align: center;
-        }
-        h1 {
-            margin-bottom: 20px;
-        }
-        .output {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            background-color: #f0f0f0;
-            white-space: pre-wrap; /* Preserve line breaks */
-        }
-        #inputForm{
-            font-size: larger;
+      *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+:root{
+   
+    --bg-color: #191f36;
+    --white-4345: #f7f7f7;
+    --bg-shade: #f5fcff;
+    --primary-text-color:#183b56;
+    --secondary-text-color:#577592;
+    --accent-color:#2294ed;
+}
+
+body{
+    background-color: var(--secondary-text-color);
+    font-family: "Poppins", sans-serif;
+ 
+    
+}
+
+.output{
+    width: 90%;
+    margin-top: 8%;
+    padding: 5%;
+    border: 1px solid #ccc;
+    background-color: var(--bg-shade);
+    white-space: pre-wrap; /* Preserve line breaks */
+    position: absolute;
+    left: 4%;
+    margin-left: 2%;
+    font-size: larger;
+}
+
+.primary-button{
+    background-color: var(--accent-color);
+    border-radius: 50px;
+    font-weight: 700;
+    color: white;
+    padding: 15px 15px ;
+    box-shadow:0 0 2px var(--secondary-text-color) ;
+    transition: all 0.3s ease;
+    margin-top: 2%;
+    margin-left: 2%;
+    cursor: pointer;
+    
+}
+
+h1{
+    font-size: 3rem;
+    margin-top: 2%;
+    margin-right: 7%;
+    text-align: center;
+    margin-bottom: 20px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+
+
+form{
+    text-align: center;
+    position: absolute;
+    left: 25%;
+    z-index: 1;
+    display: flex;
+ 
+}
+
+#userInput{
+    padding: 2%;
+    width: 40vw;
+    font-size: x-large;
+    border-radius: 50px;
+    border-color: #191f36;
+    background: var(--bg-shade);
+}
+.primary-button:hover{
+    background-color: var(--bg-color);
+
+}
+
+@media (max-width:  1000px){
+    .output{
+    margin-top: 20%;
+    }
+    #userInput{
+        width: 60vw;
+    }
+    form{
+        left: 15%;
+    }
+
         }
 
+    @media (max-width:  400px){
+         form{
+         position: absolute;
+         z-index: 1;
+         top: 90%;
+         text-align: center;
+         width: 100%;
+         left: 0%;
+         }
+
+         #userInput{
+            width: 100%;
+            font-size: medium;
+        }
+         h1{
+            display: none;
+         }
+         
+      .primary-button{
+        margin-right: 5%;
+      }
+       .output{
+        font-size: 1rem;
+        margin-top: 16%;
+       }
+
+       #useroutput{
+        margin-top: 10%;
+        
+       }
+     }
+     
     </style>
 </head>
 <body>
-    <div class="upper">
-    <h1>Alex-Chatbot</h1>
-    <div class="input">
+    <h1>Ask Your Doubt</h1>
     <form id="inputForm" action="/submit" method="post">
-        <label for="userInput">Enter your input</label><br>
-        <input type="text" id="userInput" name="userInput" required>
-        <button type="submit">Submit</button>
+        <label for="userInput" class="ai"></label>
+        <input type="text" id="userInput" name="userInput" placeholder="Type here" required>
+        <button type="submit" class="primary-button">Search</button>
     </form>
-</div>
-</div>
-    
-    <div id="outputDiv" class="output" style="display:none;"></div>
+    <div id="outputDiv" class="output" style="display:none;">
+    </div>
 
     <script>
         const form = document.getElementById('inputForm');
