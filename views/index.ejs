@@ -1,0 +1,59 @@
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            white-space: pre-wrap; /* Preserve line breaks */
+        }
+    </style>
+</head>
+<body>
+    <h1>Input Form</h1>
+    <form id="inputForm" action="/submit" method="post">
+        <label for="userInput">Enter your input:</label>
+        <input type="text" id="userInput" name="userInput" required>
+        <button type="submit">Submit</button>
+    </form>
+    
+    <div id="outputDiv" class="output" style="display:none;"></div>
+
+    <script>
+        const form = document.getElementById('inputForm');
+        const outputDiv = document.getElementById('outputDiv');
+
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+
+            const userInput = document.getElementById('userInput').value;
+            const response = await fetch('/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ userInput })
+            });
+
+            const responseData = await response.json();
+            outputDiv.innerHTML = `<strong>AI Response:</strong><br>${responseData.output}`;
+            outputDiv.style.display = 'block';
+
+            form.reset(); // Optional: Clear the form input after submission
+        });
+    </script>
+</body>
+</html>
